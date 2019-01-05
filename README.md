@@ -4,6 +4,8 @@ This golang package will automatically generate Golang unit tests directly from 
 
 ## Features
 - [x] Create Go HTTP Tests from a Postman JSON file
+- [ ] Include Authentication Headers from Postman to HTTP tests
+- [ ] Include Content Type Headers from Postman to HTTP tests
 - [ ] Convert Postman Javascript tests to Golang `assert` tests
 - [ ] Dynamic variables based on Postman Javascript tests
 
@@ -25,6 +27,7 @@ configs := postman.Config{
 ```
 
 ## Example
+This package requires a `go generate` file to automatically generator your golang tests. After you run the generator, the [api_test.go](https://github.com/hunterlong/postman/blob/master/examples/server_test.go) test file will be rendered. 
 ###### `generator.go` will create `api_test.go` with `go run generator.go`
 ```go
 // +build ignore

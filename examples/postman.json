@@ -39,14 +39,22 @@
         {
           "name": "Post Tester",
           "request": {
-            "method": "GET",
+            "method": "POST",
             "header": [],
             "body": {
               "mode": "raw",
               "raw": ""
             },
             "url": {
-              "raw": ""
+              "raw": "http://localhost:8080/post",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "post"
+              ]
             }
           },
           "response": []
