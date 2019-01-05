@@ -7,7 +7,20 @@ This golang package will automatically generate Golang unit tests directly from 
 go get github.com/hunterlong/postman
 ```
 
+## Configuration
+```go
+configs := postman.Config{
+    Package: "handlers",         // Package name for the test
+    PostmanFile: "postman.json", // Location of the Postman JSON file
+    TestFile: "api_test.go",     // Test filename to generate
+    RouterFunc: "Router()",      // Function or variable name for the HTTP Router
+    Variables: variables,        // Optional mapping of variables
+    PreTest: pretest,            // Optional test to run first
+}
+```
+
 ## Example
+###### `generator.go`
 ```go
 // +build ignore
 
