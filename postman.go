@@ -56,9 +56,11 @@ func (c *Config) Generate() error {
 			httpTests = append(httpTests, innerData)
 		}
 
+		testFunc := strings.Replace(v.Name, " ", "", -1)
+
 		testData += `
-// TestPostman` + v.Name + ` runs all the Postman tests within the ` + v.Name + ` group.
-func TestPostman` + v.Name + `(t *testing.T) {
+// TestPostman` + testFunc + ` runs all the Postman tests within the ` + v.Name + ` group.
+func TestPostman` + testFunc + `(t *testing.T) {
 
 	tests := []HTTPTest{` + strings.Join(httpTests, ",") + `}
 

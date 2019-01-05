@@ -2,6 +2,9 @@
 This golang package will automatically generate Golang unit tests directly from the Postman JSON export.
 
 
+## Features
+- [x] Create Go HTTP Tests from a Postman JSON file
+
 ## Installation
 ```go
 go get github.com/hunterlong/postman
