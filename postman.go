@@ -9,16 +9,13 @@ import (
 	"time"
 )
 
-var (
-	replacements map[string]string
-)
-
 type Config struct {
 	Package     string
 	TestFile    string
 	PostmanFile string
 	RouterFunc  string
 	Variables   map[string]string
+	PreTest     string
 }
 
 func (c *Config) Generate() error {
@@ -134,45 +131,47 @@ func RunHTTPTest(test HTTPTest) (*http.Response, error) {
     ` + c.RouterFunc + `.ServeHTTP(rr, req)
     return rr.Result(), err
 }
+
+` + c.PreTest + `
 `
 }
 
-type Info struct {
+type info struct {
 	PostmanID string `json:"_postman_id"`
 	Name      string `json:"name"`
 	Schema    string `json:"schema"`
 }
 
-type Item struct {
+type item struct {
 	Name string    `json:"name"`
-	Item []SubItem `json:"item"`
+	Item []subItem `json:"item"`
 }
 
-type SubItem struct {
+type subItem struct {
 	Name     string        `json:"name"`
-	Request  Request       `json:"request"`
+	Request  request       `json:"request"`
 	Response []interface{} `json:"response"`
 }
 
-type Request struct {
+type request struct {
 	Method string      `json:"method"`
 	Header interface{} `json:"header"`
-	Body   Body        `json:"body"`
-	URL    URL         `json:"url"`
+	Body   body        `json:"body"`
+	URL    url         `json:"url"`
 }
 
-type URL struct {
+type url struct {
 	Raw  string   `json:"raw"`
 	Host []string `json:"host"`
 	Path []string `json:"path"`
 }
 
-type Body struct {
+type body struct {
 	Mode string `json:"mode"`
 	Raw  string `json:"raw"`
 }
 
-type Auth struct {
+type auth struct {
 	Type   string `json:"type"`
 	Bearer []struct {
 		Key   string `json:"key"`
@@ -181,7 +180,7 @@ type Auth struct {
 	} `json:"bearer"`
 }
 
-type Event struct {
+type event struct {
 	Listen string `json:"listen"`
 	Script struct {
 		ID   string   `json:"id"`
@@ -190,7 +189,7 @@ type Event struct {
 	} `json:"script"`
 }
 
-type Variable struct {
+type variable struct {
 	ID    string `json:"id"`
 	Key   string `json:"key"`
 	Value string `json:"value"`
@@ -198,9 +197,9 @@ type Variable struct {
 }
 
 type Postmaner struct {
-	Info     Info       `json:"info"`
-	Item     []*Item    `json:"item"`
-	Auth     Auth       `json:"auth"`
-	Event    []Event    `json:"event"`
-	Variable []Variable `json:"variable"`
+	Info     info       `json:"info"`
+	Item     []*item    `json:"item"`
+	Auth     auth       `json:"auth"`
+	Event    []event    `json:"event"`
+	Variable []variable `json:"variable"`
 }
